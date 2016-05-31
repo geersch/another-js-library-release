@@ -1,0 +1,24 @@
+mixin cg-button()
+    - var caption = attributes['cg-button-caption'];
+    - attributes['cg-button-caption'] = undefined;
+
+    .cg-button&attributes(attributes)
+        span.cg-button__caption #{caption}
+
+mixin cg-panel()
+    - var collapsible = attributes['cg-panel-collapsible'];
+    - attributes['cg-panel-collapsible'] = undefined;
+
+    - var collapsed = attributes['cg-panel-collapsed'];
+
+    .cg-panel(
+        cg-collapsible=collapsible ? "cg-collapsible" : undefined
+        class=collapsed ? "cg-panel--collapsed" : "cg-panel--expanded"
+        cg-collapsible-collapsed=collapsed ? 'true' : undefined
+    )
+        if collapsible
+            .cg-panel__header
+                .cg-panel__toggle(ng-click="toggle()")
+        .cg-panel__content
+            .cg-panel__content-body
+                block
